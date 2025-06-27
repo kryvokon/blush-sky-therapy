@@ -1,4 +1,3 @@
-
 import { CalendarDays, MessageCircle, User, Heart, Star, Clock, Phone, Mail, MapPin } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -23,8 +22,8 @@ const Index = () => {
         
         <div className="container mx-auto px-6 relative z-10">
           <div className="max-w-7xl mx-auto">
-            <div className="grid lg:grid-cols-2 gap-16 items-center">
-              <div className="text-center lg:text-left space-y-8">
+            <div className="grid lg:grid-cols-3 gap-16 items-center">
+              <div className="lg:col-span-2 text-center lg:text-left space-y-8">
                 <div className="space-y-6">
                   <h1 className="text-6xl md:text-7xl font-extralight text-white leading-tight tracking-wide">
                     Dr. Sarah <span className="text-amber-400 font-light">Martinez</span>
@@ -82,16 +81,44 @@ const Index = () => {
               </div>
               
               <div className="relative flex justify-center lg:justify-end">
-                <div className="relative">
-                  <div className="w-96 h-96 lg:w-[450px] lg:h-[450px] rounded-full overflow-hidden shadow-2xl ring-4 ring-amber-400/20">
-                    <img 
-                      src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&w=600&q=80" 
-                      alt="Dr. Sarah Martinez" 
-                      className="w-full h-full object-cover"
-                    />
+                <div className="space-y-8">
+                  {/* Profile Image */}
+                  <div className="relative">
+                    <div className="w-96 h-96 lg:w-[400px] lg:h-[400px] rounded-full overflow-hidden shadow-2xl ring-4 ring-amber-400/20">
+                      <img 
+                        src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&w=600&q=80" 
+                        alt="Dr. Sarah Martinez" 
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                    <div className="absolute -bottom-6 -right-6 w-32 h-32 bg-amber-400/10 rounded-full blur-2xl"></div>
+                    <div className="absolute -top-6 -left-6 w-24 h-24 bg-blue-400/15 rounded-full blur-2xl"></div>
                   </div>
-                  <div className="absolute -bottom-6 -right-6 w-32 h-32 bg-amber-400/10 rounded-full blur-2xl"></div>
-                  <div className="absolute -top-6 -left-6 w-24 h-24 bg-blue-400/15 rounded-full blur-2xl"></div>
+                  
+                  {/* Direct Calendar Access */}
+                  <div className="bg-white/95 backdrop-blur-sm rounded-2xl p-6 shadow-xl border border-amber-400/20">
+                    <div className="text-center mb-4">
+                      <h3 className="text-lg font-medium text-slate-800 mb-2">Quick Booking</h3>
+                      <p className="text-sm text-slate-600">Select your preferred date</p>
+                    </div>
+                    <Calendar
+                      mode="single"
+                      selected={selectedDate}
+                      onSelect={setSelectedDate}
+                      disabled={(date) => date < new Date()}
+                      className="rounded-md pointer-events-auto mx-auto"
+                    />
+                    {selectedDate && (
+                      <div className="mt-4 space-y-3">
+                        <p className="text-center text-slate-700 text-sm">
+                          Selected: <span className="font-medium">{format(selectedDate, "MMM d, yyyy")}</span>
+                        </p>
+                        <Button className="w-full bg-amber-500 hover:bg-amber-600 text-slate-900 py-2 rounded-full text-sm">
+                          Book This Date
+                        </Button>
+                      </div>
+                    )}
+                  </div>
                 </div>
               </div>
             </div>
